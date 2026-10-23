@@ -3,10 +3,10 @@
   // own horse's inventory. Activating normally stays vanilla (Talk / Ride).
   // Since Modifier Key Framework 1.6.0 every matching rule's modifier actions are shown together, so the
   // rules keep apart on their own: a follower who is down (unconscious: Death Timer's Give Potion / Search)
-  // gets none of these. A horse shows Inventory only out of combat, Command: Flee / Fight only in combat,
-  // and a fleeing one gets Fight instead of Flee (found 2026-10-22).
+  // gets none of these. Horses go by YOUR combat (fleeing lasts while you fight): Inventory only while you're
+  // out of combat, Command: Flee / Fight only while you're in it, a fleeing one gets Fight instead of Flee.
   // Labels: Interface/Translations/MKF - Followers and Horses_<LANGUAGE>.txt
-  "version": 1,
+  "version": 8,
   "rules": [
     {
       "id": "followers",
@@ -37,20 +37,20 @@
         "faction": "Skyrim.esm|0x68D78",  // PlayerHorseFaction: horses you own
         "alive": true
       },
-      "not": { "inCombat": true },
+      "not": { "playerInCombat": true },
       "primary":   { "label": "$MKFFH_Ride" },
       "alternate": { "label": "$MKFFH_Inventory", "event": "MKFFH_OpenInventory" },
       "priority": 10
     },
     {
-      // your horse in combat: Command: Flee makes it cowardly until Fight or the end of your fight
+      // you in combat: Command: Flee makes your horse cowardly until Fight or the end of your fight
       "id": "horses-combat",
       "target": "npc",
       "requires": {
         "keyword": "Skyrim.esm|0x26110",
         "faction": "Skyrim.esm|0x68D78",
         "alive": true,
-        "inCombat": true
+        "playerInCombat": true
       },
       "not": { "faction": "MKF - Followers and Horses.esp|0x802" },  // already fleeing: horses-fleeing's Command: Fight
       "primary":   { "label": "$MKFFH_Ride" },
@@ -58,14 +58,14 @@
       "priority": 10
     },
     {
-      // a fleeing horse in combat (MKFFH_FleeingFaction, only ever on your own horses): Command: Fight
+      // a fleeing horse while you're in combat (MKFFH_FleeingFaction, only ever on your own horses): Command: Fight
       "id": "horses-fleeing",
       "target": "npc",
       "requires": {
         "keyword": "Skyrim.esm|0x26110",
         "faction": "MKF - Followers and Horses.esp|0x802",
         "alive": true,
-        "inCombat": true
+        "playerInCombat": true
       },
       "primary":   { "label": "$MKFFH_Ride" },
       "alternate": { "label": "$MKFFH_CommandFight", "event": "MKFFH_HorseCommand" },

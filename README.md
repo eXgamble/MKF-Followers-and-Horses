@@ -8,8 +8,8 @@ actions on your followers and your own horses, with Modifier Key Framework's key
 |---|---|---|
 | A follower | `Talk`: vanilla dialogue | `Inventory`: opens their inventory |
 | A follower in combat | `Give Potion`: your cheapest healing potion | `Give Restore Potion`: your cheapest magicka or stamina potion, whichever they need most |
-| Your own horse | `Ride`: vanilla riding | `Inventory`: opens its inventory |
-| Your own horse in combat | `Ride`: vanilla riding | `Command: Flee`: it stops fighting and flees; `Command: Fight` calls it back |
+| Your own horse, while you're out of combat | `Ride`: vanilla riding | `Inventory`: opens its inventory |
+| Your own horse, while you're in combat | `Ride`: vanilla riding | `Command: Flee`: it stops fighting and flees; `Command: Fight` calls it back |
 
 - The follower takes the potion and drinks it, with the drinking animation. A follower who doesn't
   need it keeps you the potion.
@@ -25,7 +25,7 @@ actions on your followers and your own horses, with Modifier Key Framework's key
 
 - [SKSE64](https://skse.silverlock.org/)
 - [Address Library for SKSE Plugins](https://www.nexusmods.com/skyrimspecialedition/mods/32444)
-- [Modifier Key Framework](https://www.nexusmods.com/skyrimspecialedition/mods/193566)
+- [Modifier Key Framework](https://www.nexusmods.com/skyrimspecialedition/mods/193566) 1.8.0 or newer
 - [powerofthree's Papyrus Extender](https://www.nexusmods.com/skyrimspecialedition/mods/22854)
 - Optional: [FormList Manipulator](https://www.nexusmods.com/skyrimspecialedition/mods/74037)
   (CACO blood potions are recognised as vampire-only)
