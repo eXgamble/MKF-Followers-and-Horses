@@ -6,7 +6,7 @@ actions on your followers and your own horses, with Modifier Key Framework's key
 
 | Target | Activate | Hold the modifier key |
 |---|---|---|
-| A follower | `Talk`: vanilla dialogue | `Inventory`: opens their inventory |
+| A follower, while you and they are out of combat | `Talk`: vanilla dialogue | `Inventory`: opens their inventory |
 | A follower in combat | `Give Potion`: your cheapest healing potion | `Give Restore Potion`: your cheapest magicka or stamina potion, whichever they need most |
 | Your own horse, while you're out of combat | `Ride`: vanilla riding | `Inventory`: opens its inventory |
 | Your own horse, while you're in combat | `Ride`: vanilla riding | `Command: Flee`: it stops fighting and flees; `Command: Fight` calls it back |
