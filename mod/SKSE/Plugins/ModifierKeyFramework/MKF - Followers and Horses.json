@@ -1,6 +1,9 @@
 {
   // MKF - Followers and Horses: hold the Modifier Key Framework key to open a follower's or your
   // own horse's inventory. Activating normally stays vanilla (Talk / Ride).
+  // Since Modifier Key Framework 1.6.0 every matching rule's modifier actions are shown together, so the
+  // rules keep apart on their own: a follower who is down (unconscious: Death Timer's Give Potion / Search)
+  // gets none of these, and a horse already fleeing gets Command: Fight only (found 2026-10-22).
   // Labels: Interface/Translations/MKF - Followers and Horses_<LANGUAGE>.txt
   "version": 1,
   "rules": [
@@ -8,7 +11,7 @@
       "id": "followers",
       "target": "npc",
       "requires": { "teammate": true, "alive": true },
-      "not": { "inCombat": true },
+      "not": { "inCombat": true, "unconscious": true },
       "primary":   { "label": "$MKFFH_Talk" },
       "alternate": { "label": "$MKFFH_Inventory", "event": "MKFFH_OpenInventory" },
       "priority": 10
@@ -16,10 +19,11 @@
     {
       // in combat: your cheapest healing potion, or (modifier key) your cheapest magicka or
       // stamina potion, whichever they need most; one event, the alternate flag tells them apart
-      // (downed followers are Death Timer's: its rule has a higher priority)
+      // (downed followers are Death Timer's: unconscious ones are left out)
       "id": "followers-combat",
       "target": "npc",
       "requires": { "teammate": true, "alive": true, "inCombat": true },
+      "not": { "unconscious": true },
       "primary":   { "label": "$MKFFH_GivePotion",        "event": "MKFFH_GivePotion" },
       "alternate": { "label": "$MKFFH_GiveRestorePotion", "event": "MKFFH_GivePotion" },
       "priority": 10
@@ -32,7 +36,7 @@
         "faction": "Skyrim.esm|0x68D78",  // PlayerHorseFaction: horses you own
         "alive": true
       },
-      "not": { "inCombat": true },
+      "not": { "inCombat": true, "faction": "MKF - Followers and Horses.esp|0x802" },  // fleeing: Command: Fight only
       "primary":   { "label": "$MKFFH_Ride" },
       "alternate": { "label": "$MKFFH_Inventory", "event": "MKFFH_OpenInventory" },
       "priority": 10
@@ -47,6 +51,7 @@
         "alive": true,
         "inCombat": true
       },
+      "not": { "faction": "MKF - Followers and Horses.esp|0x802" },  // already fleeing: horses-fleeing's Command: Fight
       "primary":   { "label": "$MKFFH_Ride" },
       "alternate": { "label": "$MKFFH_CommandFlee", "event": "MKFFH_HorseCommand" },
       "priority": 10
